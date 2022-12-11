@@ -1,0 +1,49 @@
+{{template "head.html" .}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body style="background-image: url(/static/img/background.jpg);">
+{{template "nav.html" .}}
+    <form method="POST" action="/api/tournaments">
+        <input type="hidden" name="id" value="{{ .id}}">
+        <div class="card m-5">
+            <h5 class="card-header">Create tournament</h5>
+            <div class="card-body">
+                <div class="form-group mt-3">
+                    <label for="tournament_name"><b>Tournament name</b></label>
+                    <input type="text" class="form-control" name="tournament_name" id="tournament_name" minlength="10" placeholder="Tournament name">
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="text"><b>Description</b></label>
+                    <textarea class="form-control" name="description" id="text" rows="3" placeholder="Write tournament description"></textarea>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="sport"><b>Sport</b></label><br>
+                    <select name="sport" id="sport">
+                        <option value="football" selected>Football</option>
+                        <option value="handball">Handball</option>
+                        <option value="chess">Chess</option>
+                    </select>
+                </div>
+
+                <div class="form-group mt-3">
+                    <p><b>System type</b></p>
+                    <input type="radio" class="system" id="knockout" name="system" value="knockout">
+                    <label for="knockout">Knockout system</label>
+                    <input type="radio" class="system" id="robin" name="system" value="robin">
+                    <label for="robin">Robin</label>
+                </div>
+            </div>
+        </div>
+
+        <div id="results"></div>
+
+        <div class="form-group m-5">
+            <input type="submit" class="btn btn-success" name="change_password" id="submit" value="Create tournament">
+        </div>
+    </form>
+
+<script type = "text/javascript" src="/static/js/create_tournament.js"></script>
+</body>
+</html>

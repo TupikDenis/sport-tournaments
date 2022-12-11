@@ -1,0 +1,73 @@
+{{template "head.html" .}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body style="background-image: url(/static/img/background.jpg);">
+{{template "nav.html" .}}
+<div class="card m-5">
+    <h5 class="card-header" id="tournament_name">{{ .tournament.Name}}</h5>
+    <div class="card-body">
+        <p>Sport - {{ .tournament.Sport}}</p>
+        <p>System - {{ .tournament.System}}</p>
+        <p><i>{{ .tournament.Description}}</i></p>
+        <p>
+            <select name="type" id="type">
+                <option value="html" selected>HTML</option>
+                <option value="txt">TXT</option>
+                <option value="json">JSON</option>
+            </select>
+            <div style="display: none;" id="json">{{ .tournament_matches_json}}</div>
+            <button class="btn btn-success" onclick="exportData();">Export Data</button>
+        </p>
+        {{if eq .tournament.UsernameId .id}}
+        <p>
+        <form class="form-horizontal" method="POST" id="delete" action="/api/tournaments/{{ .tournament.Id}}">
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
+        </form>
+        </p>
+        {{end}}
+
+        <div id="result"></div>
+
+    </div>
+</div>
+
+<div class="m-5" style="background-color: white">
+    <h1 style="text-align: center">Sheldure</h1>
+    <table class="table table-striped" id="table">
+        <thead>
+        <tr>
+            <th scope="col" style="text-align: center">#</th>
+            <th scope="col" style="text-align: center">Home team</th>
+            <th scope="col" style="text-align: center">Home score</th>
+            <th scope="col" style="text-align: center">-</th>
+            <th scope="col" style="text-align: center">Away score</th>
+            <th scope="col" style="text-align: center">Away team</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{range $key, $value := .tournament_matches}}
+        <tr>
+            <td style="text-align: center" colspan="6">
+                <b>{{ $value.Round}} round</b>
+            </td>
+        </tr>
+        {{range $k, $v := $value.Pair}}
+        <tr>
+            <th scope="row" style="text-align: center">{{ $v.Number}}</th>
+            <td style="text-align: center">{{  $v.HomeTeam}}</td>
+            <td style="text-align: center">{{  $v.HomeScore}}</td>
+            <td style="text-align: center">-</td>
+            <td style="text-align: center">{{  $v.AwayScore}}</td>
+            <td style="text-align: center">{{  $v.AwayTeam}}</td>
+        </tr>
+        {{end}}
+        {{end}}
+        </tbody>
+    </table>
+</div>
+<script type = "text/javascript" src="/static/js/export.js"></script>
+<script type = "text/javascript" src="/static/js/delete_tournament.js"></script>
+</body>
+</html>

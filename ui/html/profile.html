@@ -1,0 +1,46 @@
+{{template "head.html" .}}
+</head>
+<body>
+{{template "nav.html" .}}
+<div class="card m-5">
+    <h5 class="card-header">{{ .username}}</h5>
+    <div class="card-body">
+        <p class="card-text"><b>Role</b> - {{ .role}}</p>
+    </div>
+</div>
+
+<div class="card m-5">
+    <div class="card-body">
+        <button type="button" class="btn btn-success" onclick="window.location.href ='/tournament/create';">Create tournament</button>
+        <!--<button type="button" class="btn btn-danger" onclick="window.location.href ='/api/users';">All users</button>-->
+        <button type="button" class="btn btn-danger" onclick="window.location.href ='/logout';">Exit</button>
+    </div>
+</div>
+
+<div class="card m-5">
+    <h5 class="card-header">Change password</h5>
+    <div class="card-body">
+        <form id="update_user_password" method="POST" action="/api/users/password/{{ .id}}">
+            <div class="form-group mt-3">
+                <label for="old_password">Old password</label>
+                <input type="password" class="form-control" name="old_password" id="old_password" placeholder="Old password">
+            </div>
+            <div class="form-group mt-3">
+                <label for="password-sign-up">New password</label>
+                <input type="password" class="form-control" name="new_password" id="password-sign-up" placeholder="New password">
+            </div>
+            <div class="form-group mt-3">
+                <label for="password_repeat">Repeat new password</label>
+                <input type="password" class="form-control" id="password_repeat" placeholder="Repeat new password">
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" class="btn btn-success" name="change_password" id="submit" value="Change password">
+            </div>
+        </form>
+    </div>
+</div>
+<script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type = "text/javascript" src="/static/js/registration.js"></script>
+<script type = "text/javascript" src = "/static/js/update_user.js"></script>
+</body>
+</html>

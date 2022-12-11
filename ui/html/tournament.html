@@ -1,0 +1,17 @@
+{{template "head.html" .}}
+</head>
+<body style="background-image: url(/static/img/background.jpg);">
+{{template "nav.html" .}}
+{{range $key, $value := .tournaments}}
+<div class="card m-5">
+    <h5 class="card-header">{{ $value.Name}}</h5>
+    <div class="card-body">
+        <p>Sport - {{ $value.Sport}}</p>
+        <p>System - {{ $value.System}}</p>
+        <p><i>{{ $value.Description}}</i></p>
+        <button type="button" class="btn btn-success" onclick="window.location.href ='/api/tournaments/{{$value.Id}}';">Details</button>
+    </div>
+</div>
+{{end}}
+</body>
+</html>

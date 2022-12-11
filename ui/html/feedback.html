@@ -1,0 +1,21 @@
+{{template "head.html" .}}
+</head>
+<body style="background-image: url(/static/img/background.jpg);">
+{{template "nav.html" .}}
+<div class="m-5" style="background-color: white; border-radius: 10px">
+    <form class="p-4" method="POST" action="/feedback/send">
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+        </div>
+        <div class="form-group mt-3">
+            <label for="text">Your text</label>
+            <textarea class="form-control" name="text" id="text" rows="3" placeholder="Write your text"></textarea>
+        </div>
+        <div class="form-group mt-3">
+            <input type="submit" class="btn btn-success" value="Send">
+        </div>
+    </form>
+</div>
+</body>
+</html>
